@@ -1,1 +1,7 @@
 *.docx#
+
+\.idea\
+
+\.idea/inspectionProfiles/
+
+\.idea/

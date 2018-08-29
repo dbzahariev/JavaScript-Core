@@ -1,9 +1,9 @@
 const kinveyRequester = (function () {
 
-    const BASE_URL = 'https://baas.kinvey.com/'
-    const APP_KEY = 'kid_SJQXSaQwm'
-    const APP_SECRET = '1faed6624270410599065580a2257404'
-    const AUTH_HEADERS = {'Authorization': "Basic " + btoa(APP_KEY + ":" + APP_SECRET)}
+    const BASE_URL = 'https://baas.kinvey.com/';
+    const APP_KEY = 'kid_SJQXSaQwm';
+    const APP_SECRET = '1faed6624270410599065580a2257404';
+    const AUTH_HEADERS = {'Authorization': "Basic " + btoa(APP_KEY + ":" + APP_SECRET)};
 
     function registerUser(username, password) {
         $.ajax({
@@ -12,7 +12,7 @@ const kinveyRequester = (function () {
             headers: AUTH_HEADERS,
             data: {username, password}
         }).then(function (res) {
-            signInUser(res, 'Registration successful.')
+            signInUser(res, 'Registration successful.');
             $('#formRegister').trigger('reset')
         }).catch(handleError)
     }
@@ -24,7 +24,7 @@ const kinveyRequester = (function () {
             headers: AUTH_HEADERS,
             data: {username, password}
         }).then(function (res) {
-            signInUser(res, 'Login successful.')
+            signInUser(res, 'Login successful.');
             $('#formLogin').trigger('reset')
         }).catch(handleError)
     }
@@ -36,10 +36,10 @@ const kinveyRequester = (function () {
             headers: {Authorization: 'Kinvey ' + sessionStorage.getItem('authToken')}
         }).catch(function (err) {
             console.log(err)
-        })
-        sessionStorage.clear()
-        showInfo("Logout successful")
-        showHomeView()
+        });
+        sessionStorage.clear();
+        showInfo("Logout successful");
+        showHomeView();
         showHideLinks()
     }
 
@@ -52,8 +52,8 @@ const kinveyRequester = (function () {
             data: {destination, origin, departureDate, departureTime,
                 seats, cost, img, isPublic}
         }).then(function () {
-            showHomeView()
-            showInfo("Created flight.")
+            showHomeView();
+            showInfo("Created flight.");
             $('#formAddFlight').trigger("reset")
         }).catch(handleError)
     }
@@ -86,7 +86,7 @@ const kinveyRequester = (function () {
             url: BASE_URL + 'appdata/' + APP_KEY + '/flights/' + id,
             headers: {Authorization: 'Kinvey ' + sessionStorage.getItem('authToken')},
         }).then(function () {
-            showInfo("Flight deleted.")
+            showInfo("Flight deleted.");
             $("#linkFlights").trigger('click')
         }).catch(handleError)
     }
@@ -99,21 +99,21 @@ const kinveyRequester = (function () {
             headers: {Authorization: 'Kinvey ' + sessionStorage.getItem('authToken')},
             data: {destination, origin, departureDate, departureTime, seats, cost, img, isPublic}
         }).then(function (res) {
-            showInfo("Successfully edited flight.")
+            showInfo("Successfully edited flight.");
             renderDetailsView(res)
         }).catch(handleError)
     }
 
     function signInUser(res, message) {
-        saveUserSession(res)
-        showInfo(message)
-        showHomeView()
+        saveUserSession(res);
+        showInfo(message);
+        showHomeView();
         showHideLinks()
     }
 
     function saveUserSession(userInfo) {
-        sessionStorage.setItem('authToken', userInfo._kmd.authtoken)
-        sessionStorage.setItem('username', userInfo.username)
+        sessionStorage.setItem('authToken', userInfo._kmd.authtoken);
+        sessionStorage.setItem('username', userInfo.username);
         sessionStorage.setItem('userId', userInfo._id)
     }
 
@@ -123,4 +123,4 @@ const kinveyRequester = (function () {
 
     return {registerUser, loginUser, logoutUser, postFlight, getAllPublicFlight,
         editFlight, getMyFlights, removeFlight}
-}())
+}());
