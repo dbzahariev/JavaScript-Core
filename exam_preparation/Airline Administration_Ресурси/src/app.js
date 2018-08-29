@@ -1,0 +1,5 @@
+$(() => {
+    showHideLinks()
+    hideAllViews()
+    attachEvents()
+});

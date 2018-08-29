@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>Airline Administration</title>
     <link rel="stylesheet" href="static/css/style.css">
+    <script src="./jquery-3.1.1.min.js"></script>
+    <script src="src/atachRequest.js"></script>
+    <script src="src/app.js"></script>
 </head>
 <body>
 
@@ -11,15 +14,15 @@
     <nav>
         <div class="left-container">
             <ul>
-                <li><a href="">Home</a></li>
-                <li><a href="">Flights</a></li>
-                <li><a href="">Login</a></li>
-                <li><a href="">Register</a></li>
+                <li id="linkHome"><a href="#">Home</a></li>
+                <li id="linkFlights"><a href="#">Flights</a></li>
+                <li id="linkLogin"><a href="#">Login</a></li>
+                <li id="linkRegister"><a href="#">Register</a></li>
             </ul>
         </div>
-        <div class="right-container">
+        <div class="right-container" id="linkLogout">
             <span>Welcome, {name} |</span>
-            <a href="" class="log-out">Logout</a>
+            <a href="#" class="log-out">Logout</a>
         </div>
     </nav>
 
@@ -78,7 +81,7 @@
             <label>Origin:</label>
             <input type="text" name="origin" placeholder="Origin">
 			<label>Departure Date:</label>
-            <input type="date" name="departureDate">
+            <input type="date" name="departureDate" title="date">
             <label>Departure Time:</label>
             <input type="time" name="departureTime">
             <label>Number of Seats:</label>
