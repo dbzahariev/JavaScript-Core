@@ -38,8 +38,13 @@ function attachEvents() {
         $('#viewRegister').show()
     })
     $('#linkLogout').on('click', function () {
-        //TODO:
+        //TODO: Logout
     })
+}
+
+function showHomeView() {
+    hideAllViews()
+    $('#viewCatalog').show()
 }
 
 function hideAllLinks() {

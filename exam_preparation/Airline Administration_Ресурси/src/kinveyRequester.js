@@ -109,6 +109,7 @@ const kinveyRequester = (function () {
         showInfo(message);
         showHomeView();
         showHideLinks()
+
     }
 
     function saveUserSession(userInfo) {
