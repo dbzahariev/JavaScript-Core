@@ -108,8 +108,8 @@ const kinveyRequester = (function () {
         saveUserSession(res);
         showInfo(message);
         showHomeView();
-        showHideLinks()
-
+        showHideLinks();
+        $('#linkLogout > span').text("Welcome, " + res.username + "!")
     }
 
     function saveUserSession(userInfo) {

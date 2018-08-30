@@ -1,7 +1,7 @@
 function showHideLinks() {
     hideAllLinks();
-    if (sessionStorage.getItem("authoToken")){
-        $('#linkflights').show()
+    if (sessionStorage.getItem("authToken")){
+        $('#linkFlights').show()
         $('#linkLogout').show()
     } else {
         $('#linkLogin').show()
@@ -11,13 +11,13 @@ function showHideLinks() {
 
 function hideAllViews() {
     $('#container > section').hide()
-    // $('#viewRegister').hide()
-    // $('#viewLogin').hide()
-    // $('#viewCatalog').hide()
-    // $('#viewAddFlight').hide()
-    // $('#viewFlightDetails').hide()
-    // $('#viewEditFlight').hide()
-    // $('#viewMyFlights').hide()
+    $('#viewRegister').hide()
+    $('#viewLogin').hide()
+    $('#viewCatalog').hide()
+    $('#viewAddFlight').hide()
+    $('#viewFlightDetails').hide()
+    $('#viewEditFlight').hide()
+    $('#viewMyFlights').hide()
 }
 
 function attachEvents() {

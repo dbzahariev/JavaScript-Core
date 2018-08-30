@@ -23,6 +23,7 @@ function attachButtonEvents() {
     })
 
     $("#linkLogout > a").on('click', function () {
+        showHideLinks()
         kinveyRequester.logoutUser()
     })
 
