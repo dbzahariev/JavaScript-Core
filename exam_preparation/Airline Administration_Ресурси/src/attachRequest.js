@@ -37,8 +37,9 @@ function attachEvents() {
         hideAllViews()
         $('#viewRegister').show()
     })
-    $('#linkLogout').on('click', function () {
-        //TODO: Logout
+    $('#viewCatalog > ').on('click', function () {
+        hideAllLinks()
+        $('#viewAddFlight').show()
     })
 }
 
