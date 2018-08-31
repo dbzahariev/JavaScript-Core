@@ -24,7 +24,15 @@ handlers.registerUser = function (ctx) {
         auth.register(username, password)
             .then((userData) => {
                 auth.saveSession(userData)
-                notify.showInfo()
+                notify.showInfo('User registration successful.')
             })
+            .catch(notify.handleError)
     }
+}
+
+handlers.loginUser = function (ctx) {
+    const username = ctx.params.username
+    const password = ctx.params.password
+
+
 }
