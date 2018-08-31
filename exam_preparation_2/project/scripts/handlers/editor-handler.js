@@ -10,13 +10,13 @@ handlers.getEditor = async function (ctx) {
             .getAllByReceiptId(receipt._id);
 
         if (entries.length > 0) {
-            entries.forEach((e) => {
-                e.subtotal = (e.quantity * e.price).toFixed(2)
+            entries.forEach((entrie) => {
+                entrie.subtotal = (entrie.quantity * entrie.price).toFixed(2)
             });
 
             ctx.productsCount = entries.length;
             ctx.total = entries
-                .map(e => +e.subtotal)
+                .map(entrie => +entrie.subtotal)
                 .reduce((a, b) => a + b)
                 .toFixed(2);
         } else {

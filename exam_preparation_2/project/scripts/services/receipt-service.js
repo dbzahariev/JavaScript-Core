@@ -23,11 +23,11 @@ let receiptService = (()=> {
 
         return remote.get('appdata', endPoint, 'kinvey')
     }
-    async function checkOut(receiptId, productCount, total) {
+    async function checkOut(receiptId, productsCount, total) {
         const endPoint = `receipts/${receiptId}`
         let receipt = await getById(receiptId)
         receipt['active'] = false
-        receipt['productsCount'] = productCount
+        receipt['productsCount'] = productsCount
         receipt['total'] = total
 
         return remote.update('appdata', endPoint, 'kinvey', receipt)
