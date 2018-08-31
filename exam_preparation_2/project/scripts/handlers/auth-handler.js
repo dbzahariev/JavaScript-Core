@@ -29,10 +29,26 @@ handlers.registerUser = function (ctx) {
             .catch(notify.handleError)
     }
 }
-
 handlers.loginUser = function (ctx) {
     const username = ctx.params.username
     const password = ctx.params.password
 
-
+    if (username.length===0 || password.length===0) {
+        notify.showError('Both is required!')
+    } else {
+        auth.login(username, password)
+            .then((userData) => {
+                auth.saveSession(userData)
+                notify.showInfo('Login successful.')
+                ctx.redirect('#/editor')
+            }).catch(notify.handleError)
+    }
+}
+handlers.logout = function (ctx) {
+    auth.logout()
+        .then(() => {
+            sessionStorage.clear()
+            notify.showInfo('Logout successful.')
+            ctx.redirect('#/home')
+        })
 }
