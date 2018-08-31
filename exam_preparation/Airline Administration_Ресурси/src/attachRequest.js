@@ -21,13 +21,15 @@ function hideAllViews() {
 }
 
 function attachEvents() {
-    $('#linkFlights').on('click', function () {
-        hideAllViews()
-        $('#viewMyFlights').show()
-    })
     $('#linkHome').on('click', function () {
         hideAllViews()
         $('#viewCatalog').show()
+    })
+    $('#linkFlights').on('click', async function() {
+        hideAllViews()
+        let flights = await kinveyRequester.getMyFlights()
+        renderMyFlights(flights)
+        $('#viewMyFlights').show()
     })
     $('#linkLogin').on('click', function () {
         hideAllViews()
@@ -43,9 +45,19 @@ function attachEvents() {
     })
 }
 
-function showHomeView() {
+async function showHomeView() {
+    let myUsername = sessionStorage.getItem("username")
+    $('#linkLogout > span').text("Welcome, " + myUsername + '!')
     hideAllViews()
-    $('#viewCatalog').show()
+    $('#viewCatalog > div > a').remove()
+    if (myUsername) {
+        let flights = await kinveyRequester.getAllPublicFlight()
+        renderHomeView(flights)
+        $('#viewCatalog').show()
+        $('#viewCatalog > a').show()
+    } else {
+        $('#viewCatalog > a').hide()
+    }
 }
 
 function hideAllLinks() {

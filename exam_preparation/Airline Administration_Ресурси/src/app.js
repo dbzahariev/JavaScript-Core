@@ -4,4 +4,5 @@ $(() => {
     attachEvents()
     attachButtonEvents()
     attachBoxesEvents()
+    showHomeView()
 });

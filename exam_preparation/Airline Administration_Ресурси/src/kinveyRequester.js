@@ -35,7 +35,7 @@ const kinveyRequester = (function () {
             url: BASE_URL +  'user/' + APP_KEY + '/_logout',
             headers: {Authorization: 'Kinvey ' + sessionStorage.getItem('authToken')}
         }).catch(function (err) {
-            console.log(err)
+            showError(err.message)
         });
         sessionStorage.clear();
         showInfo("Logout successful");
