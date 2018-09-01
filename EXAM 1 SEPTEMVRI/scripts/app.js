@@ -16,6 +16,9 @@ $(() => {
         this.post('#/login', handlers.postLoginUser);
         this.get('#/logout', handlers.logout);
 
+        this.get('#/myProfile', handlers.myProfile)
+
+
         this.get('#/editor', handlers.getEditor);
         this.post('#/entry/create', handlers.createEntry);
         this.post('#/entry/delete', handlers.deleteEntry);

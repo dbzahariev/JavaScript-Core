@@ -3,6 +3,10 @@ let auth = (() => {
         return sessionStorage.getItem('authtoken') !== null;
     }
 
+    function getUser(userId) {
+        return remote.get('user', '_me', 'kinvey');
+    }
+
     function saveSession(userData) {
         sessionStorage.setItem('authtoken', userData._kmd.authtoken);
         sessionStorage.setItem('username', userData.username);
@@ -30,6 +34,7 @@ let auth = (() => {
         login,
         logout,
         register,
-        saveSession
+        saveSession,
+        getUser
     }
 })();
