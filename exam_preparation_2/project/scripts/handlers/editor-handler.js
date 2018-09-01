@@ -79,7 +79,7 @@ handlers.checkout = function (ctx) {
     if(productsCount === 0) {
         notify.showError('Cannot checkout without any products!');
     } else {
-        receiptService.checkout(receiptId, productsCount, total)
+        receiptService.checkOut(receiptId, productsCount, total)
             .then(() => {
                 notify.showInfo('Receipt checked out!');
                 ctx.redirect('#/editor');

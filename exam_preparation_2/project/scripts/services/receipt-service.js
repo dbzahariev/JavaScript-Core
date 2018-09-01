@@ -37,6 +37,7 @@ let receiptService = (()=> {
         getActive,
         create,
         getMyReceipts,
-        getById
+        getById,
+        checkOut
     }
 })()
