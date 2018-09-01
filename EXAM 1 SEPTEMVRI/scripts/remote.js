@@ -1,7 +1,7 @@
 let remote = (() => {
     const BASE_URL = 'https://baas.kinvey.com/';
-    const APP_KEY = 'kid_SJwrTsww7'; // TODO: APP KEY HERE
-    const APP_SECRET = 'd7fe16bf71724acd80bee85b96312ebe'; // TODO: APP SECRET HERE
+    const APP_KEY = 'kid_SJwrTsww7';
+    const APP_SECRET = 'd7fe16bf71724acd80bee85b96312ebe';
 
     function makeAuth(auth) {
         if (auth === 'basic') {
@@ -11,10 +11,6 @@ let remote = (() => {
         }
     }
 
-    // request method (GET, POST, PUT)
-    // kinvey module (user/appdata)
-    // url endpoint
-    // auth
     function makeRequest(method, module, endpoint, auth) {
         return {
             url: BASE_URL + module + '/' + APP_KEY + '/' + endpoint,
@@ -44,6 +40,7 @@ let remote = (() => {
     }
 
     function remove(module, endpoint, auth) {
+        console.log(module, endpoint, auth)
         return $.ajax(makeRequest('DELETE', module, endpoint, auth));
     }
 

@@ -7,6 +7,10 @@ let auth = (() => {
         return remote.get('user', '_me', 'kinvey');
     }
 
+    function getMemesByUserName(userName) {
+        return remote.get('appdata',`memes?query={"creator":"${userName}"}&sort={"_kmd.ect": -1}`)
+    }
+
     function saveSession(userData) {
         sessionStorage.setItem('authtoken', userData._kmd.authtoken);
         sessionStorage.setItem('username', userData.username);
@@ -29,12 +33,34 @@ let auth = (() => {
         return remote.post('user', '_logout', 'kinvey');
     }
 
+    function deleteUser(userId) {
+        return remote.remove('user', userId, 'kinvey')
+    }
+
+    function deleteMeme(memeId) {
+        return remote.remove('appdata',`memes/${memeId}`,'kinvey')
+    }
+
+    function editMeme(memeId, data) {
+        return remote.update('appdata',`memes/${memeId}`,'kivey', data )
+    }
+
+    function getOneMemeById(memeId) {
+        return remote.get('appdata', `memes/${memeId}`, 'kinvey')
+    }
+
     return {
         isAuth,
         login,
         logout,
         register,
         saveSession,
-        getUser
+        getUser,
+        deleteUser,
+        getMemesByUserName,
+        deleteMeme,
+        editMeme,
+        getOneMemeById,
+
     }
 })();

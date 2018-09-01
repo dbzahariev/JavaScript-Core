@@ -1,7 +1,6 @@
 const handlers = {};
 
 $(() => {
-    // Define routes here using Sammy.js
     const app = Sammy('#container', function () {
 
         this.use('Handlebars', 'hbs');
@@ -18,14 +17,10 @@ $(() => {
 
         this.get('#/myProfile', handlers.myProfile)
 
+        this.get('#/user/delete/:id', handlers.deleteUser)
+        this.get('#/meme/delete/:id', handlers.deleteMeme)
 
-        this.get('#/editor', handlers.getEditor);
-        this.post('#/entry/create', handlers.createEntry);
-        this.post('#/entry/delete', handlers.deleteEntry);
-        this.post('#/checkout', handlers.checkout);
-
-        this.get('#/overview', handlers.getMyReceipts);
-        this.get('#/receipt/details/:id', handlers.getReceiptDetails);
+        this.get('#/meme/edit/:id', handlers.editMemeGet)
     });
 
     app.run();

@@ -1,6 +1,8 @@
+{{> header}}
+
 <div class="user-profile">
 
-    <img id="user-avatar-url" src="{{username.avatar}}" alt="user-profile">
+    <img id="user-avatar-url" src="{{username.avatarUrl}}" alt="user-profile">
     <h1>{{username.username}}</h1>
     <h2>{{username.email}}</h2>
 
@@ -8,18 +10,11 @@
 
     <p id="user-listings-title">User Memes</p>
     <div class="user-meme-listings">
-        <div class="user-meme">
-            <a href="#/meme/details" class="user-meme-title">Разбираемо...</a>
-            <a href="#/meme/details"> <img class="userProfileImage" src="https://scontent.fsof3-1.fna.fbcdn.net/v/t1.0-9/31924539_2110321352572189_5652160133854134272_n.jpg?_nc_cat=0&oh=dc73aad9af411f76454dd70ea1ab2775&oe=5C2FB35A"></a>
-
-            <div class="user-memes-buttons">
-
-                <a href="#/meme/edit" class="user-meme-btn">Edit</a>
-                <a href="#/meme/delete" class="user-meme-btn">Delete</a>
-
-            </div>
-        </div>
+        {{#each memes}}
+            {{> memeList}}
+        {{/each}}
         <p class="no-memes">No memes in database.</p>
-
     </div>
 </div>
+
+{{> footer}}

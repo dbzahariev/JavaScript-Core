@@ -5,8 +5,10 @@ handlers.getWelcomePage = function (ctx) {
             loginForm: 'templates/forms/login-form.hbs',
             registerForm: 'templates/forms/register-form.hbs',
             footer: 'templates/common/footer.hbs',
-            login: 'templates/common/loginButton.hbs'
+            login: 'templates/common/loginButton.hbs',
+            header: 'templates/common/header-empty.hbs',
         }).then(function () {
+            this.partial.username = sessionStorage.getItem('username');
             this.partial('templates/login-form-login.hbs');
         })
     } else {
@@ -14,7 +16,6 @@ handlers.getWelcomePage = function (ctx) {
             header: 'templates/common/header.hbs',
             loginForm: 'templates/forms/login-form.hbs',
             registerForm: 'templates/forms/register-form.hbs',
-
             footer: 'templates/common/footer.hbs',
         }).then(function () {
             this.partial.username = sessionStorage.getItem('username');
@@ -23,10 +24,15 @@ handlers.getWelcomePage = function (ctx) {
     }
 };
 handlers.getRegisterUser = function (ctx) {
-    ctx.loadPartials()
-        .then(function () {
-        this.partial('templates/forms/register-form.hbs');
+    ctx.username = sessionStorage.getItem('username')
+    ctx.loadPartials({
+        header: 'templates/common/header-empty.hbs',
+        footer: 'templates/common/footer.hbs'
     })
+        .then(function () {
+            this.partial.username = sessionStorage.getItem('username');
+            this.partial('templates/forms/register-form.hbs');
+        })
 };
 handlers.postRegisterUser = function (ctx) {
     const username = ctx.params.username;
@@ -71,20 +77,66 @@ handlers.postLoginUser = function (ctx) {
     }
 };
 handlers.getLoginUser = function (ctx) {
-    ctx.loadPartials().then(function () {
+    ctx.username = sessionStorage.getItem('username')
+    ctx.loadPartials({
+        header: 'templates/common/header-empty.hbs',
+        footer: 'templates/common/footer.hbs'
+    }).then(function () {
+        this.partial.username = sessionStorage.getItem('username');
         this.partial('templates/forms/login-form.hbs');
     })
 };
 handlers.myProfile = function (ctx) {
     let userId = sessionStorage.getItem('userId')
-    // ctx.usernameAvatarUrl =
-    // console.log(ctx.userId)
     auth.getUser(userId).then((user) => {
         ctx.username = user
-        ctx.loadPartials().then(function () {
-            this.partial('templates/forms/myProfile.hbs');
+
+        auth.getMemesByUserName(ctx.username.username).then((memes) => {
+            ctx.memes = memes
+            ctx.username = sessionStorage.getItem('username')
+            ctx.loadPartials({
+                header: 'templates/common/header.hbs',
+                footer: 'templates/common/footer.hbs',
+                memeList: 'templates/forms/memeList.hbs',
+            }).then(function () {
+                this.partial.username = sessionStorage.getItem('username');
+                this.partial('templates/forms/myProfile.hbs');
+            })
         })
     })
+}
+
+handlers.deleteUser = function(ctx) {
+    auth.deleteUser(sessionStorage.getItem('userId')).then((res)=>{
+        sessionStorage.clear()
+        ctx.redirect('#/home');
+    })
+}
+
+handlers.deleteMeme = function(ctx) {
+    let memeId = ctx.params.id
+    console.log(memeId)
+    auth.deleteMeme(memeId).then(() => {
+        ctx.redirect('#/home');
+    })
+}
+
+handlers.editMemeGet = function(ctx) {
+    ctx.username = sessionStorage.getItem('username')
+    let memeId = ctx.params.id
+    auth.getOneMemeById(memeId).then((res) => {
+        ctx.loadPartials({
+            header: 'templates/common/header.hbs',
+            footer: 'templates/common/footer.hbs'
+        }).then(function () {
+            ctx.title = res.title
+            ctx.description = res.description
+            ctx.imageUrl = res.imageUrl
+            this.partial.username = sessionStorage.getItem('username');
+            this.partial('templates/forms/meme-edit.hbs');
+        })
+    })
+
 }
 
 handlers.logout = function (ctx) {
